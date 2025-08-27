@@ -27,4 +27,7 @@
   font-weight: 700;
   font-style: normal;
 }
+.gradient{
+  background-image: radial-gradient(ellipse at center ,#006747 , #013828);
+}
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment05</title>
+    <link rel="stylesheet" href="index.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
@@ -17,11 +18,11 @@
         </div>
         <div class="flex items-center space-x-2">
             <div class="flex items-center p-2 bg-green-100 rounded-full">
-                <p id="heart" class="font-extrabold mr-2">0</p>
+                <p id="heart-count" class="font-extrabold mr-2">0</p>
                 <img class="w-5 h-5" src="assets/heart.png" alt="">
                 </div>
                 <div class="flex items-center p-2 bg-green-100 rounded-full">
-                    <p id="coin" class="font-extrabold mr-2">100</p>
+                    <p id="coin-count" class="font-extrabold mr-2">100</p>
                     <img class="w-5 h-5" src="assets/coin.png" alt="">
                 </div>
                 <div class="flex items-center p-2 rounded-full bg-[#00A63E] text-white">
@@ -30,9 +31,10 @@
          </div>
     </nav>
 
-    <section class="bg-gradient-to-r from-green-900 to-green-600 text-white p-25 flex flex-col items-center justify-center text-center">
-        <img src="assets/logo-dark.png w-20 h-20" alt="">
-
+    <section class="gradient text-white p-5 flex flex-col items-center justify-center text-center">
+        <img class=" w-20 h-20 p-1" src="assets/logo-dark.png" alt="">
+        <h1 class="font-extrabold p-2 ">Emergency Service Directory</h1>
+        <p class="font-semibold text-xs md:whitespace-nowrap">Government Emergency Service at Your Fingertip - A project by Goverment of the People's Republic of Bangladesh</p>
     </section>
     
 </body>
