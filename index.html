@@ -3,39 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment05</title>
+    <title>Emergency Hotline</title>
     <link rel="stylesheet" href="index.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
-</style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
+    </style>
 </head>
-<body class="bg-green-100">
-    <nav class="bg-white py-4 px-5 flex items-center justify-between ">
-        <div class="flex items-center ">
-                <img class="w-6 h-6 mr-2" src="assets/logo.png" alt="">
-                <p class="text-[#006747] text-[0.5rem] font-extrabold  md: text-xl">Emergency <br> Service</p>
-        </div>
-        <div class="flex items-center space-x-2 sm:space-x-4">
-            <div class="flex items-center px-2 py-1 bg-green-100 rounded-full ">
-                <p id="heart-count" class="font-extrabold mr-1 text-xs">0</p>
-                <img class="w-4 h-4" src="assets/heart.png" alt="">
-                </div>
-                <div class="flex items-center px-2 py-1 bg-green-100 rounded-full ">
-                    <p id="coin-count" class="font-extrabold mr-1 text-xs">100</p>
-                    <img class="w-4 h-4" src="assets/coin.png" alt="">
-                </div>
-                <div class="flex items-center px-2 py-1 rounded-full bg-[#00A63E] text-white text-xs font-semibold">
-                <button>Copy</button>
-            </div>
-        </div>
-    </nav>
+<body class="bg-gray-100">
 
-    <section class="gradient text-white p-5 flex flex-col items-center justify-center text-center">
-        <img class=" w-15 h-15 p-1 sm: w-10 sm: h-10" src="assets/logo-dark.png" alt="">
-        <h1 class="font-bold p-2 sm: text-xs">Emergency Service Directory</h1>
-        <p class="font-semibold banner">Government Emergency Service at Your Fingertip - A project by Goverment of the People's Republic of Bangladesh</p>
+<nav class="bg-white py-4 px-5 flex items-center justify-between">
+    <div class="flex items-center">
+        <img class="w-6 h-6 mr-2" src="assets/logo.png" alt="">
+        <p class="text-[#006747] text-[0.5rem] font-extrabold md: text-xl">Emergency <br> Service</p>
+    </div>
+    <div class="flex items-center space-x-2 sm:space-x-4">
+        <div class="flex items-center px-2 py-1 bg-green-100 rounded-full">
+            <span id="heart-count" class="font-extrabold mr-1 text-xs">0</span>
+            <img class="w-4 h-4" src="assets/heart.png" alt="">
+        </div>
+        <div class="flex items-center px-2 py-1 bg-green-100 rounded-full">
+            <p id="coin-count" class="font-extrabold mr-1 text-xs">100</p>
+            <img class="w-4 h-4" src="assets/coin.png" alt="">
+        </div>
+        <div class="flex items-center px-2 py-1 rounded-full bg-[#00A63E] text-white text-xs hover:bg-gray-400 cursor-pointer">
+            <p id="copy-count" class="font-semibold">0</p>
+            <p class="ml-1 font-semibold">Copy</p>
+        </div>
+    </div>
+</nav>
+
+<section class="gradient text-white p-5 flex flex-col items-center justify-center text-center">
+    <img class=" w-15 h-15 p-1 sm: w-10 sm: h-10" src="assets/logo-dark.png" alt="">
+    <h1 class="font-bold p-2 sm: text-xs">Emergency Service Directory</h1>
+    <p class="font-semibold banner">Government Emergency Service at Your Fingertip - A project by Goverment of the People's Republic of Bangladesh</p>
+</section>
+
+<main class="container mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-6">
+
+    <section class="md:col-span-9">
+        <div id="card-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        </div>
     </section>
-    
+
+    <aside class="md:col-span-3 bg-white p-6 rounded-lg card-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex">
+                <img class="w-6 h-7" src="assets/clock.png" alt="">
+                <h3 class="text-lg font-bold">Call History</h3>
+            </div>
+            <button id="clear-history-btn" class=" text-sm font-semibold hover:bg-gray-400 rounded-full bg-[#00A63E] text-white text-sm font-semibold py-3 px-5 cursor-pointer">Clear</button>
+        </div>
+        <div id="history-list" class="space-y-4">
+        </div>
+    </aside>
+
+</main>
+
+<script>
+    const heartCountEl = document.getElementById('heart-count');
+    const coinCountEl = document.getElementById('coin-count');
+    const copyCountEl = document.getElementById('copy-count');
+    const cardContainer = document.getElementById('card-container');
+    const historyList = document.getElementById('history-list');
+    const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+    let heartCount = 0;
+    let coinCount = 100;
+    let copyCount = 0;
+
+    const hotlines = [
+        { name: "National Emergency Number", nameEn: "National Emergency", number: "999", category: "All", icon: "assets/emergency.png" },
+        { name: "Police Helpline Number", nameEn: "Police", number: "999", category: "police", icon: "assets/police.png" },
+        { name: "Fire Service Number", nameEn: "Fire Service", number: "999", category: "Fire", icon: "assets/fire-service.png" },
+        { name: "Ambulance Service", nameEn: "Ambulance", number: "1994-999999", category: "Health", icon: "assets/ambulance.png" },
+        { name: "Women & Child Helpline", nameEn: "Women & Child Helpline", number: "109", category: "Help", icon: "assets/emergency.png" },
+        { name: "Anti-Corruption Helpline", nameEn: "Anti-Corruption", number: "106", category: "Govt.", icon: "assets/emergency.png" },
+        { name: "Electricity Helpline", nameEn: "Electricity Outage", number: "16216", category: "Electricity", icon: "assets/emergency.png" },
+        { name: "Brac Helpline", nameEn: "Brac", number: "16445", category: "NGO", icon: "assets/emergency.png" },
+        { name: "Bangladesh Railway Helpline", nameEn: "Bangladesh Railway", number: "163", category: "Travel", icon: "assets/emergency.png" },
+    ];
+
+    function renderCards() {
+        cardContainer.innerHTML = '';
+        hotlines.forEach(hotline => {
+            const card = document.createElement('div');
+            card.className = "bg-white p-6 rounded-lg card-shadow flex flex-col";
+            card.innerHTML = `
+                <div class="p-2 rounded-lg flex flex-col relative"> 
+                    <img class="cursor-pointer w-5 heart-icon absolute top-4 right-4" src="assets/love.png" alt="">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="">
+                                <img class="w-8 h-8 bg-red-200 rounded-xl " src="${hotline.icon}" alt="${hotline.name} Icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <h4 class="text-xl font-semibold">${hotline.name}</h4>
+                    <p class="text-sm text-gray-500">${hotline.nameEn}</p>
+                    <p class="text-2xl font-bold mt-2">${hotline.number}</p>
+                    <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded-full">${hotline.category}</span>
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    <button class="flex-1 flex items-center justify-center py-2 rounded-full bg-gray-200 text-gray-800 font-semibold copy-btn cursor-pointer hover:bg-gray-700 hover:text-white" data-number="${hotline.number}">
+                        <img class="w-5 mr-1" src="assets/copy.png" alt="Copy icon">Copy
+                    </button>
+                     <button class="flex-1 flex items-center justify-center py-2 rounded-full bg-green-500 text-white font-semibold call-btn hover:bg-gray-500" data-name="${hotline.name}" data-number="${hotline.number}">
+                        <img class="w-5 mr-1" src="assets/phonecall.png" alt="Phone icon">Call
+                     </button>
+                </div>
+            `;
+            cardContainer.appendChild(card);
+        });
+    }
+
+    cardContainer.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.closest('.heart-icon')) {
+            heartCount++;
+            heartCountEl.textContent = heartCount;
+        }
+        if (target.closest('.copy-btn')) {
+            const numberToCopy = target.closest('.copy-btn').dataset.number;
+            navigator.clipboard.writeText(numberToCopy).then(() => {
+                alert(`Number ${numberToCopy} has been copied!`);
+                copyCount++;
+                copyCountEl.textContent = copyCount;
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy the number.');
+            });
+        }
+        if (target.closest('.call-btn')) {
+            const callBtn = target.closest('.call-btn');
+            const serviceName = callBtn.dataset.name;
+            const serviceNumber = callBtn.dataset.number;
+
+            if (coinCount < 20) {
+                alert("You don't have enough coins to make a call. Minimum 20 coins required.");
+                return;
+            }
+
+            coinCount -= 20;
+            coinCountEl.textContent = coinCount;
+
+            alert(`Calling ${serviceName} on ${serviceNumber}...`);
+
+            const currentTime = new Date().toLocaleTimeString();
+            const historyItem = document.createElement('div');
+            historyItem.className = "p-3 bg-gray-100 rounded-lg";
+            historyItem.innerHTML = `
+                <p class="font-semibold text-gray-800">${serviceName}</p>
+                <p class="text-sm text-gray-600">${serviceNumber}</p>
+                <p class="text-xs text-gray-400 mt-1">Called at: ${currentTime}</p>
+            `;
+            historyList.appendChild(historyItem);
+        }
+    });
+    clearHistoryBtn.addEventListener('click', () => {
+        historyList.innerHTML = '';
+        alert("Call history has been cleared.");
+    });
+    renderCards();
+</script>
+
 </body>
 </html>

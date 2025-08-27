@@ -34,11 +34,14 @@
   font-size: small;
   white-space: nowrap;
 }
+.card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
 @media screen and (min-width: 320px ) and (max-width: 576px) {
   .banner{
     font-size: 0.3rem ;
   }
   
 }
-/* sm:w-130 text-xs whitespace-nowrap md:w-130 text-[0.5rem] lg:w-160 text-xs  */
 
+/* <span class="absolute top-2 right-2 text-xl cursor-pointer heart-icon"></i></span> */
