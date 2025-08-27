@@ -34,7 +34,7 @@
   font-size: x-small;
   white-space: nowrap;
 }
-@media screen and (max-width: 600px ) {
+@media screen and (max-width: 576px ) {
   .banner{
     font-size: xx-small;
   }
