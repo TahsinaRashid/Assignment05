@@ -31,12 +31,12 @@
   background-image: radial-gradient(ellipse at center ,#006747 , #013828);
 }
 .banner{
-  font-size: x-small;
+  font-size: small;
   white-space: nowrap;
 }
 @media screen and (max-width: 576px ) {
   .banner{
-    font-size: xx-small;
+    font-size: 0.5rem ;
   }
   
 }
