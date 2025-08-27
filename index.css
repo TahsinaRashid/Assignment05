@@ -34,10 +34,11 @@
   font-size: small;
   white-space: nowrap;
 }
-@media screen and (max-width: 576px ) {
+@media screen and (min-width: 320px ) and (max-width: 576px) {
   .banner{
     font-size: 0.5rem ;
   }
   
 }
+/* sm:w-130 text-xs whitespace-nowrap md:w-130 text-[0.5rem] lg:w-160 text-xs  */
 
