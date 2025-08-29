@@ -4,7 +4,7 @@
 
 Answer: **getElementById** uses only one id attributes to select an element.
 Whereas **geElementByClassName** that has a class to select every element.
-Then**querySelector**uses when we need to select a specific element but we do not have any id then we use this but it only selects the first matched element.
+Then **querySelector** uses when we need to select a specific element but we do not have any id then we use this but it only selects the first matched element.
 Finally **querySelectorAll** means when we need to select all the element according to the selectors then we use it.
 
 
